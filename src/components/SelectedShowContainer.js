@@ -19,11 +19,9 @@ function SelectedShowContainer(props) {
   }
 
   function mapEpisodes() {
-    return props.episodes.map((e) => {
+    return allEpisodes.map((e) => {
       if (e.season === selectedSeason) {
-        return <Episode eachEpisode={e} key={e.id} />;
-      } else {
-        return null
+        return <Episode myEpisode={e} key={e.id} />;
       }
     });
   }
@@ -32,7 +30,7 @@ function SelectedShowContainer(props) {
     setSelectedSeason(e.target.value);
   }
 
-  const { selectedShow } = props;
+  const { selectedShow, allEpisodes } = props;
 
   return (
     <div style={{ position: "static" }}>
