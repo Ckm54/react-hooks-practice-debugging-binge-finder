@@ -14,7 +14,7 @@ function TVShowList(props) {
       });
     }
     return props.shows.map((s) => (
-      <TVShow show={s} key={s.id} selectShow={props.selectShow} />
+      <TVShow show={s} key={s.id} selectShow={() => props.selectShow(s)} />
     ));
   }
 
