@@ -8,7 +8,7 @@ import SelectedShowContainer from "./SelectedShowContainer";
 function App() {
   const [shows, setShows] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedShow, setSelectedShow] = useState("");
+  const [selectedShow, setSelectedShow] = useState({});
   const [episodes, setEpisodes] = useState([]);
   const [filterByRating, setFilterByRating] = useState("");
 
@@ -31,10 +31,13 @@ function App() {
   }
 
   function selectShow(show) {
-    Adapter.getShowEpisodes(show.id).then((episodes) => {
+    Adapter.getShowEpisodes(show.id).then((episodesData) => {
+      
+      setEpisodes(episodesData);
       setSelectedShow(show);
-      setEpisodes(episodes);
+
     });
+    
   }
 
   let displayShows = shows;
@@ -43,6 +46,10 @@ function App() {
       return s.rating.average >= filterByRating;
     });
   }
+
+  function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+}
 
   return (
     <div>
@@ -53,7 +60,7 @@ function App() {
       />
       <Grid celled>
         <Grid.Column width={5}>
-          {!!selectedShow ? (
+          {!isEmpty(selectedShow) ? (
             <SelectedShowContainer
               selectedShow={selectedShow}
               allEpisodes={episodes}
