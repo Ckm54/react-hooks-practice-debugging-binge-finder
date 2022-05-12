@@ -42,7 +42,7 @@ function App() {
     
   }
 
-  let displayShows = shows;
+  let displayShows = [...shows];
   if (filterByRating) {
     displayShows = displayShows.filter((s) => {
       return s.rating.average >= filterByRating;
