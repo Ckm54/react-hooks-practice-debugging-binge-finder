@@ -22,6 +22,8 @@ function App() {
 
   function handleSearch(e) {
     setSearchTerm(e.target.value.toLowerCase());
+    const results = shows.filter((show) => (show.name.toLowerCase()).includes(searchTerm))
+    setShows(results)
   }
 
   function handleFilter(e) {
@@ -56,7 +58,7 @@ function App() {
       <Nav
         handleFilter={handleFilter}
         handleSearch={handleSearch}
-        searchTerm={searchTerm}
+        search={searchTerm}
       />
       <Grid celled>
         <Grid.Column width={5}>
